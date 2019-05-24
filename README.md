@@ -1,1 +1,1 @@
-# libretro-docker-android-SDK
+# libretro-docker-android-sdk
