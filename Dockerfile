@@ -47,6 +47,16 @@ RUN mkdir -p ${ANDROID_HOME} && cd ${ANDROID_HOME} && \
     unzip *tools*linux*.zip && \
     rm *tools*linux*.zip
 
+# download and install Android NDK
+ENV ANDROID_NDK_HOME /opt/android-ndk
+RUN mkdir /opt/android-ndk-tmp \
+    && cd /opt/android-ndk-tmp && wget -q http://dl.google.com/android/ndk/android-ndk-r10e-linux-x86_64.bin \
+    && cd /opt/android-ndk-tmp && chmod a+x ./android-ndk-r10e-linux-x86_64.bin \
+    && cd /opt/android-ndk-tmp && ./android-ndk-r10e-linux-x86_64.bin \
+    && cd /opt/android-ndk-tmp && mv ./android-ndk-r10e /opt/android-ndk \
+    && rm -rf /opt/android-ndk-tmp 
+ENV PATH ${PATH}:${ANDROID_NDK_HOME}
+
 # download and install apache ant
 ENV ANT_VERSION=1.10.6
 ENV ANT_HOME=/opt/ant
